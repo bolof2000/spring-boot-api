@@ -29,4 +29,16 @@ public class ThemParkApplicationIT {
                 .andExpect(status().isOk())
                 .andReturn();
     }
+
+    @Test
+    private void createRide() throws Exception {
+
+        String newRide = "{\"name\":\"Monorail\",\"description\":\"Sedate travelling ride.\",\"thrillFactor\":2,\"vomitFactor\":1}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/ride")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(newRide)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
 }
