@@ -34,8 +34,9 @@ test {
     useJUnitPlatform()
 }
 
-String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'tkgregory'
-String imageName = "${dockerHubUsernameProperty}/spring-boot-api-example:$version"
+String imageName = "bolof2000/demo:$version"
+//String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'tkgregory'
+//String imageName = "${dockerHubUsernameProperty}/spring-boot-api-example:$version"
 
 docker {
     name imageName
@@ -46,21 +47,6 @@ docker {
 dockerRun {
     name project.name
     image imageName
-    ports '8080:8080'
+    ports '9393:9393'
     clean true
-}
-
-aws {
-    region = findProperty('region') ?: 'us-east-1'
-}
-
-cloudFormation {
-    stackName "$project.name-stack"
-    stackParams([
-            SubnetID: findProperty('subnetId') ?: '',
-            ServiceName: project.name,
-            ServiceVersion: project.version,
-            DockerHubUsername: dockerHubUsernameProperty
-    ])
-    templateFile project.file("ecs.yml")
 }
