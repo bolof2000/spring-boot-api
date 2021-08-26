@@ -39,4 +39,4 @@ IAC_ALL/tf_docker/.terraform
 IAC_ALL/tf_docker/terraform.tfstate
 IAC_ALL/tf_docker/terraform.tfstate.backup
 IAC_ALL/tf_docker/.terraform.lock.hcl
-
+./notes.txt

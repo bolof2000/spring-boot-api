@@ -25,3 +25,13 @@ git branch --merged
 git merge branch_name_to_merge_to_master
 
 git push origin master
+
+
+
+to delete the branch after its merged
+
+git branch --merged
+bit branch -d branch_name_to_delete
+git branch -a
+
+git push origin --delete branch_name_in_remote
