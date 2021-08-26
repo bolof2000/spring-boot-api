@@ -1,0 +1,10 @@
+git diff  -- see changes to code
+git branch -a
+
+git add -A
+
+git pull origin master
+git push origin master
+
+git branch branch_name
+git checkout branch_name
