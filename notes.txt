@@ -8,3 +8,20 @@ git push origin master
 
 git branch branch_name
 git checkout branch_name
+
+git push -u origin branch_name
+
+git branch -a
+
+
+merging your branch changes to master
+
+git checkout master
+
+git pull origin master
+
+git branch --merged
+
+git merge branch_name_to_merge_to_master
+
+git push origin master
