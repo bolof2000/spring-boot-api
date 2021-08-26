@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import utils.DataGenerator;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,9 +23,19 @@ public class DepartmentApplicationIT {
 
 
    @Test
+   public void createDepartment() throws Exception {
+      mockMvc.perform(MockMvcRequestBuilders.post("/departments/")
+              .contentType(MediaType.APPLICATION_JSON).content(DataGenerator.departmentTestData())
+              .accept(MediaType.APPLICATION_JSON))
+              .andExpect(status().isOk())
+              .andReturn();
+   }
+
+
+   @Test
    public void getAllDepartments() throws Exception {
 
-      mockMvc.perform(MockMvcRequestBuilders.get("/")
+      mockMvc.perform(MockMvcRequestBuilders.get("/departments/")
       .accept(MediaType.APPLICATION_JSON))
               .andExpect(status().isOk())
               .andReturn();
