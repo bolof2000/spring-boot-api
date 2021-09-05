@@ -4,10 +4,10 @@ package com.example.demo.controller;
 import com.example.demo.entity.Department;
 import com.example.demo.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -17,6 +17,9 @@ public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private RabbitTemplate template;
 
     @PostMapping("/")
     public Department saveDepartment(@RequestBody Department department) {
@@ -33,6 +36,14 @@ public class DepartmentController {
     @GetMapping("/")
     public List<Department> findAllDepartment(){
         return departmentService.findAllDepartment();
+    }
+
+    @PostMapping("/publish")
+    public String publishDepartment(@RequestBody Department department) {
+      Department departmentD =  departmentService.saveDepartment(department);
+      template.convertAndSend(MQConfig.EXCHANGE,MQConfig.ROUTING_KEY,departmentD);
+      return departmentD.toString();
+
     }
 
 }

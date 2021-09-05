@@ -35,3 +35,5 @@ bit branch -d branch_name_to_delete
 git branch -a
 
 git push origin --delete branch_name_in_remote
+
+docker run -d --hostname my-rabbit --name some-rabbit2 -p 15672:15672 -p 5672:5672 rabbitmq:3-management
