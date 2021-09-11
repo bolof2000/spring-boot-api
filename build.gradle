@@ -22,7 +22,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-devtools'
-    implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
@@ -35,12 +34,7 @@ dependencies {
     testImplementation 'org.springframework.amqp:spring-rabbit-test'
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
-
-
-
-
-
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 
     compileOnly 'org.projectlombok:lombok:1.18.20'

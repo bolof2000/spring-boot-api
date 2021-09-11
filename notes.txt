@@ -37,3 +37,38 @@ git branch -a
 git push origin --delete branch_name_in_remote
 
 docker run -d --hostname my-rabbit --name some-rabbit2 -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+
+
+node {
+
+    stage("Git Clone"){
+
+        git credentialsId: 'GIT_HUB_CREDENTIALS',url:'https://github.com/bolof2000/CICD-Docker-kubernetes.git'
+    }
+
+    stage("Gradle Build"){
+        sh './gradlew build'
+    }
+
+     stage("Docker build"){
+        sh 'docker version'
+        sh 'docker build -t bolof-docker-demo .'
+        sh 'docker image list'
+        sh 'docker tag bolof-docker-demo bolof2000/bolof-docker-demo:bolof-docker-demo'
+    }
+    stage("Docker Login"){
+        withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
+            sh 'docker login -u bolof2000 -p $PASSWORD'
+        }
+    }
+
+    stage("Push Image to Docker Hub"){
+        sh 'docker push  bolof2000/bolof-docker-demo:bolof-docker-demo'
+    }
+
+}
+docker image prune -a
+
+docker rmi -f image_id
+
+docker container run -it -d -p 9393:9393 bolof2000/demo:0.1.0-SNAPSHOT

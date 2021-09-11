@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Department;
+import com.example.demo.entity.DepartmentModel;
 import com.example.demo.repository.DepartmentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,17 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    public Department saveDepartment(Department department) {
+    public DepartmentModel saveDepartment(DepartmentModel department) {
         log.info("Inside saveDepartment of DepartmentService");
         return departmentRepository.save(department);
     }
 
-    public Department findDepartmentById(Long departmentId) {
+    public DepartmentModel findDepartmentById(Long departmentId) {
         log.info("Inside saveDepartment of DepartmentService");
         return departmentRepository.findByDepartmentId(departmentId);
     }
 
-    public List<Department> findAllDepartment() {
+    public List<DepartmentModel> findAllDepartment() {
         
         return departmentRepository.findAll();
     }

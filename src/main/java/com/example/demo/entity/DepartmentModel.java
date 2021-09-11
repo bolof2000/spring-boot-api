@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Department {
+public class DepartmentModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

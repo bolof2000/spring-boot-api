@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Department;
+import com.example.demo.entity.DepartmentModel;
 import com.example.demo.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -22,28 +22,29 @@ public class DepartmentController {
     private RabbitTemplate template;
 
     @PostMapping("/")
-    public Department saveDepartment(@RequestBody Department department) {
+    public DepartmentModel saveDepartment(@RequestBody DepartmentModel department) {
         log.info("Inside saveDepartment method of DepartmentController");
         return  departmentService.saveDepartment(department);
     }
 
     @GetMapping("/{id}")
-    public Department findDepartmentById(@PathVariable("id") Long departmentId) {
+    public DepartmentModel findDepartmentById(@PathVariable("id") Long departmentId) {
         log.info("Inside findDepartmentById method of DepartmentController");
         return departmentService.findDepartmentById(departmentId);
     }
 
     @GetMapping("/")
-    public List<Department> findAllDepartment(){
+    public List<DepartmentModel> findAllDepartment(){
         return departmentService.findAllDepartment();
     }
 
     @PostMapping("/publish")
-    public String publishDepartment(@RequestBody Department department) {
-      Department departmentD =  departmentService.saveDepartment(department);
+    public DepartmentModel publishDepartment(@RequestBody DepartmentModel department) {
+      DepartmentModel departmentD =  departmentService.saveDepartment(department);
       template.convertAndSend(MQConfig.EXCHANGE,MQConfig.ROUTING_KEY,departmentD);
-      return departmentD.toString();
+      return departmentD;
 
     }
+
 
 }
